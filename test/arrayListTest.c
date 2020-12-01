@@ -29,5 +29,5 @@ int main() {
     puts("Reversing list...");
     reverseList(l);
     printList(l);
-    freeList(l);
+    freeList(l, true);
 }

@@ -1,3 +1,4 @@
+#include <stdbool.h>
 
 typedef struct {
     //do not change this value manually
@@ -11,7 +12,7 @@ typedef struct {
 arrayList* createArrayList(int startSize, float growthFactor);
 void append(arrayList* l, void* item);
 void iterateList(arrayList* l, void (*iterator)(void*));
-void freeList(arrayList* l);
+void freeList(arrayList* l, bool freeValues);
 void* removeItemAt(arrayList* l, int index);
 void* removeFirst(arrayList* l);
 void* removeLast(arrayList* l);

@@ -38,9 +38,6 @@ static void expandList(arrayList* l) {
 }
 
 void append(arrayList* l, void* item) {
-    if (!l) {
-        fatalError("arrayList was null");
-    }
     if (l->_nextIndex >= l->_currentSize) {
         expandList(l);
         append(l, item);
@@ -80,10 +77,11 @@ void* removeLast(arrayList* l) {
     return removeItemAt(l, l->_nextIndex - 1);
 }
 
+int getLastIndex(arrayList* l) {
+    return l->_nextIndex <= 0 ? -1 : l->_nextIndex - 1;
+}
+
 void reverseList(arrayList* l) {
-    if (!l) {
-        fatalError("arrayList was null");
-    }
     if (l->_nextIndex <= 1) {
         return;
     }
@@ -101,8 +99,10 @@ void iterateList(arrayList* l, void (*iterator)(void*)) {
     }
 }
 
-void freeList(arrayList* l) {
-    iterateList(l, free);
+void freeList(arrayList* l, bool freeValues) {
+    if (freeValues) {
+        iterateList(l, free);
+    }
     free(l->array);
     free(l);
 }
