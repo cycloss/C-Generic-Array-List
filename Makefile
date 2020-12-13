@@ -19,7 +19,7 @@ leakCheck: ./$(TEST_NAME)
 
 ifeq ($(OS), Darwin)
 
-LIB_NAME = libarraylist.a
+LIB_NAME = libGenericStructures.a
 OBJECT_FILES = arraylist.o
 DESTDIR = /usr/local
 

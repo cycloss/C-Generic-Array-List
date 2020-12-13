@@ -14,9 +14,9 @@ static void testIndex(arrayList* l, int i) {
     }
 }
 
-arrayList* createArrayList(int startSize, float growthFactor) {
-    int size = startSize > 4 ? startSize : 10;
-    float gf = growthFactor >= 1.2 ? growthFactor : 1.75;
+arrayList* createArrayList() {
+    int size = 100;
+    float gf = 1.75;
     arrayList* al = malloc(sizeof(arrayList));
     void** ar = malloc(sizeof(void*) * size);
     if (!(al && ar)) {
@@ -32,7 +32,6 @@ static void expandList(arrayList* l) {
     if (!newArray) {
         fatalError("arrayList expansion failed");
     }
-    printf("Expanding list size from %i to %i\n", l->_currentSize, newSize);
     l->_currentSize = newSize;
     l->array = newArray;
 }
@@ -79,6 +78,10 @@ void* removeLast(arrayList* l) {
 
 int getLastIndex(arrayList* l) {
     return l->_nextIndex <= 0 ? -1 : l->_nextIndex - 1;
+}
+
+int getSize(arrayList* l) {
+    return l->_nextIndex;
 }
 
 void reverseList(arrayList* l) {
