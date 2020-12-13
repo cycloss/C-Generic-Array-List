@@ -12,11 +12,14 @@ typedef struct {
 
 arrayList* createArrayList();
 void append(arrayList* l, void* item);
-void iterateList(arrayList* l, void (*iterator)(void*));
-void freeList(arrayList* l, bool freeValues);
+void* getItemAt(arrayList* l, int index);
+void* getFirst(arrayList* l);
+void* getLast(arrayList* l);
 void* removeItemAt(arrayList* l, int index);
 void* removeFirst(arrayList* l);
 void* removeLast(arrayList* l);
 int getLastIndex(arrayList* l);
 int getSize(arrayList* l);
 void reverseList(arrayList* l);
+void iterateList(arrayList* l, void (*iterator)(void*));
+void freeList(arrayList* l, bool freeValues);
