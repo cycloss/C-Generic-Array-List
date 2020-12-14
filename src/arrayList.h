@@ -1,9 +1,11 @@
+#ifndef ARRAY_LIST_L
+#define ARRAY_LIST_L
 #include <stdbool.h>
 
 typedef struct {
     //the number of items the list can currently hold
     //do not change this value manually
-    int _currentSize;
+    int _currentCapacity;
     float growthFactor;
     //do not change this value manually
     int _nextIndex;
@@ -11,15 +13,17 @@ typedef struct {
 } arrayList;
 
 arrayList* createArrayList();
-void append(arrayList* l, void* item);
+void appendToAl(arrayList* l, void* item);
 void* getItemAt(arrayList* l, int index);
-void* getFirst(arrayList* l);
-void* getLast(arrayList* l);
+void* getFirstItem(arrayList* l);
+void* getLastItem(arrayList* l);
 void* removeItemAt(arrayList* l, int index);
-void* removeFirst(arrayList* l);
-void* removeLast(arrayList* l);
-int getLastIndex(arrayList* l);
+void* removeFirstItem(arrayList* l);
+void* removeLastItem(arrayList* l);
+int getLastIndexAl(arrayList* l);
 int getSize(arrayList* l);
-void reverseList(arrayList* l);
-void iterateList(arrayList* l, void (*iterator)(void*));
-void freeList(arrayList* l, bool freeValues);
+void reverseAl(arrayList* l);
+void iterateListItems(arrayList* l, void (*iterator)(void*));
+void freeAl(arrayList* l, bool freeValues);
+
+#endif

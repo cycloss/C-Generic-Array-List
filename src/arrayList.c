@@ -27,19 +27,19 @@ arrayList* createArrayList() {
 }
 
 static void expandList(arrayList* l) {
-    int newSize = l->_currentSize * l->growthFactor;
+    int newSize = l->_currentCapacity * l->growthFactor;
     void** newArray = realloc(l->array, sizeof(void*) * newSize);
     if (!newArray) {
         fatalError("arrayList expansion failed");
     }
-    l->_currentSize = newSize;
+    l->_currentCapacity = newSize;
     l->array = newArray;
 }
 
-void append(arrayList* l, void* item) {
-    if (l->_nextIndex >= l->_currentSize) {
+void appendToAl(arrayList* l, void* item) {
+    if (l->_nextIndex >= l->_currentCapacity) {
         expandList(l);
-        append(l, item);
+        appendToAl(l, item);
     } else {
         l->array[l->_nextIndex++] = item;
     }
@@ -50,11 +50,11 @@ void* getItemAt(arrayList* l, int index) {
     return l->array[index];
 }
 
-void* getFirst(arrayList* l) {
+void* getFirstItem(arrayList* l) {
     return getItemAt(l, 0);
 }
 
-void* getLast(arrayList* l) {
+void* getLastItem(arrayList* l) {
     return getItemAt(l, l->_nextIndex - 1);
 }
 
@@ -68,15 +68,15 @@ void* removeItemAt(arrayList* l, int index) {
     return item;
 }
 
-void* removeFirst(arrayList* l) {
+void* removeFirstItem(arrayList* l) {
     return removeItemAt(l, 0);
 }
 
-void* removeLast(arrayList* l) {
+void* removeLastItem(arrayList* l) {
     return removeItemAt(l, l->_nextIndex - 1);
 }
 
-int getLastIndex(arrayList* l) {
+int getLastIndexAl(arrayList* l) {
     return l->_nextIndex <= 0 ? -1 : l->_nextIndex - 1;
 }
 
@@ -84,7 +84,7 @@ int getSize(arrayList* l) {
     return l->_nextIndex;
 }
 
-void reverseList(arrayList* l) {
+void reverseAl(arrayList* l) {
     if (l->_nextIndex <= 1) {
         return;
     }
@@ -96,15 +96,15 @@ void reverseList(arrayList* l) {
     }
 }
 
-void iterateList(arrayList* l, void (*iterator)(void*)) {
+void iterateListItems(arrayList* l, void (*iterator)(void*)) {
     for (int i = 0; i < l->_nextIndex; i++) {
         iterator(l->array[i]);
     }
 }
 
-void freeList(arrayList* l, bool freeValues) {
+void freeAl(arrayList* l, bool freeValues) {
     if (freeValues) {
-        iterateList(l, free);
+        iterateListItems(l, free);
     }
     free(l->array);
     free(l);

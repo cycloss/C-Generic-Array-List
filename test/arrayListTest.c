@@ -9,7 +9,7 @@ void printItem(void* item) {
 }
 
 void printList(arrayList* l) {
-    iterateList(l, printItem);
+    iterateListItems(l, printItem);
 }
 
 int main() {
@@ -17,7 +17,7 @@ int main() {
     for (int i = 0; i < COUNT; i++) {
         int* n = malloc(sizeof(int));
         *n = i + 1;
-        append(l, n);
+        appendToAl(l, n);
     }
 
     printList(l);
@@ -27,7 +27,7 @@ int main() {
     free(item);
     printList(l);
     puts("Reversing list...");
-    reverseList(l);
+    reverseAl(l);
     printList(l);
-    freeList(l, true);
+    freeAl(l, true);
 }
