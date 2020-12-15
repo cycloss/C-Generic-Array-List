@@ -45,6 +45,16 @@ void appendToAl(arrayList* l, void* item) {
     }
 }
 
+/**
+ * @return a pointer to the replaced item if there was one at the insert index already.
+ * Make sure to free the replaced item if it was allocated memory.
+ */
+void* insertItemAt(arrayList* l, int index, void* item) {
+    void* replaced = l->array[index];
+    l->array[index] = item;
+    return replaced;
+}
+
 void* getItemAt(arrayList* l, int index) {
     testIndex(l, index);
     return l->array[index];
@@ -108,4 +118,16 @@ void freeAl(arrayList* l, bool freeValues) {
     }
     free(l->array);
     free(l);
+}
+
+void clearAl(arrayList* l, bool freeValues) {
+
+    for (int i = 0; i < l->_nextIndex; i++) {
+        void* itemp = insertItemAt(l, i, NULL);
+        if (itemp && freeValues) {
+            free(itemp);
+        }
+    }
+
+    l->_nextIndex = 0;
 }

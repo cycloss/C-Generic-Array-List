@@ -29,5 +29,13 @@ int main() {
     puts("Reversing list...");
     reverseAl(l);
     printList(l);
-    freeAl(l, true);
+
+    puts("Clearing list...");
+    clearAl(l, true);
+    puts("Adding 100...");
+    int item2 = 100;
+    appendToAl(l, &item2);
+    printList(l);
+
+    freeAl(l, false);
 }
